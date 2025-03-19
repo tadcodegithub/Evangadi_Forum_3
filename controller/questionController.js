@@ -1,0 +1,1 @@
+function getAllQuestions(req, res) {}
