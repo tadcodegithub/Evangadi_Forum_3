@@ -26,4 +26,3 @@ async function autMiddleware(req, res, next) {
       .json({ msg: "Authentication Invalid" })
   }
 }
-module.exports = autMiddleware

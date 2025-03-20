@@ -10,4 +10,3 @@ const dbcon = mysql2.createPool({
   connectionLimit: 10,
 })
 
-module.exports = dbcon.promise()
