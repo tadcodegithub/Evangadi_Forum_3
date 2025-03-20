@@ -1,9 +1,21 @@
+// const dbConnection = require("../db/dbConfig");
+const { StatusCodes } = require("http-status-codes");
 
-
-function createQuestion(req, res) {}
-
-
-
-function getAllQuestions(req, res) {}
-
-
+async function createQuestion(req, res) {
+  const { title, description } = req.body;
+  if (!title || !description) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please provide all required fields" });
+  }
+  try {
+    return res
+      .status(StatusCodes.CREATED)
+      .json({ message: "Question created successfully" });
+  } catch (error) {
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "An unexpected error occurred." });
+  }
+}
+module.exports = { createQuestion };
