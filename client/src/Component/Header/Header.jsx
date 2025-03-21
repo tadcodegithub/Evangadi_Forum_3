@@ -1,38 +1,29 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import classes from "./Header.module.css";
-import logo from "./images/Logo.png";
+import style from "./Header.module.css";
 
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  
   const handleAuthClick = () => {
     setIsLoggedIn((prevState) => !prevState);
-    navigate(isLoggedIn ? "/login" : "/dashboard"); 
+    navigate(isLoggedIn ? "/login" : "/dashboard");
   };
 
   return (
-    <header className={classes.headerContainer}>
-      {/* Logo (Clickable for Navigation) */}
-      <div className={classes.innerClass} onClick={() => navigate("/HomePages")}>
-        <img className={classes.headerImg} src={logo} alt="/HomePage" />
+    <header className={style.header_container}>
+      <div className={style.logo_div}>
+        <div className={style.logo}>
+          <img src="/Logo.png" alt="/Home" />
+        </div>
       </div>
-
-      {/* Navigation Links */}
-      <nav className={classes.navLinks}>
-        <Link to="/HomePages">Home</Link>
-        <Link to="/How-it-works">How it works</Link>
-      </nav>
-
-      {/* Authentication Button */}
-      <div className={classes.authButton}>
-        <button
-          className={isLoggedIn ? classes.logoutButton : classes.signInButton}
-          onClick={handleAuthClick}
-        >
-          {isLoggedIn ? "LOG OUT" : "SIGN IN"}
+      <div className={style.login_logout_div}>
+        <Link to="/Home">Home</Link>
+        <Link to="/How it works">How it Works</Link>
+        <button onClick={handleAuthClick}>
+          {" "}
+          {isLoggedIn ? "LOG OUT" : "SIGN IN"}{" "}
         </button>
       </div>
     </header>
