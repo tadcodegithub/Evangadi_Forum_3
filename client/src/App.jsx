@@ -1,11 +1,22 @@
-import React from 'react'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./Component/Header/Header";
+// import Home from "./Pages/HomePage/HomePages";
+// import HowItWorks from "./pages/HowItWorks";
+// import Login from "./pages/Login";
+
 
 function App() {
   return (
-    <div>
-      Hello this is our project client side skeleton!!
-    </div>
-  )
+    <Router>
+      <Header />
+      {/* <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
+        <Route path="/login" element={<Login />} />
+      </Routes> */}
+    </Router>
+  );
 }
 
-export default App
+export default App;
