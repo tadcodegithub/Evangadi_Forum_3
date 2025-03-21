@@ -1,9 +1,10 @@
 import React from 'react'
+import RegisterPage from './Pages/RegistrationPage/RegisterPage'
 
 function App() {
   return (
     <div>
-      Hello this is our project client side skeleton!!
+      <RegisterPage />
     </div>
   )
 }
