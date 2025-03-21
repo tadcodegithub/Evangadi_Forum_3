@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const register = async (req, res) => {
     const { username, email, password ,firstname , lastname} = req.body;
-    if (!(username || email || password || firstname || lastname)) {
+    if (!username || !email || !password || !firstname || !lastname) {
       return   res.status(400).json({ msg: "All input is required" });
     }
 
