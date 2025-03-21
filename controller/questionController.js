@@ -18,4 +18,11 @@ async function createQuestion(req, res) {
       .json({ message: "An unexpected error occurred." });
   }
 }
-module.exports = { createQuestion };
+async function singleQuestion(req,res) {
+  res.send(`specific question for id=${req.params.question_id}`)
+  
+}
+async function getAllQuestion(req,res){
+  
+}
+module.exports = { createQuestion,getAllQuestion,singleQuestion};
