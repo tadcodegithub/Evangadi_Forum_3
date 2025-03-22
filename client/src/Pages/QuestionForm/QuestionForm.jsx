@@ -1,26 +1,25 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
-import styles from "./question.module.css";
-import axios from "../../utility/axios";
+import React, { useRef } from "react"
+import { Link } from "react-router-dom"
+import styles from "./question.module.css"
+import axios from "../../utility/axios"
 const QuestionForm = () => {
-  const titleRef = useRef(null);
-  const descriptionRef = useRef(null);
+  const titleRef = useRef(null)
+  const descriptionRef = useRef(null)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const title = titleRef.current.value;
-    const description = descriptionRef.current.value;
-    const token = localStorage.getItem("token"); // Get the token for authentication
-
+    e.preventDefault()
+    const title = titleRef.current.value
+    const description = descriptionRef.current.value
+    const token = localStorage.getItem("token") // Get the token for authentication
     // Check if the user is authenticated before sending the request
     if (!token) {
-      alert("Please log in to ask a question");
-      return;
+      alert("Please log in to ask a question")
+      return
     }
 
     try {
       const response = await axios.post(
-        "/api/questions",
+        "/api/question",
         {
           title,
           description,
@@ -31,19 +30,19 @@ const QuestionForm = () => {
             Authorization: `Bearer ${token}`, // Include the JWT token
           },
         } // Config object for headers
-      );
+      )
 
-      console.log("Question submitted:", { title, description });
-      console.log("Response from server:", response.data);
+      console.log("Question submitted:", { title, description })
+      console.log("Response from server:", response.data)
 
       // Clear the form
-      titleRef.current.value = "";
-      descriptionRef.current.value = "";
+      titleRef.current.value = ""
+      descriptionRef.current.value = ""
     } catch (error) {
-      console.error("Error submitting question:", error.message);
-      alert("Failed to submit question. Please try again.");
+      console.log("Error submitting question:", error.message)
+      alert("Failed to submit question. Please try again.")
     }
-  };
+  }
   return (
     <div className={styles.question_page}>
       <div className={styles.steps}>
@@ -81,7 +80,7 @@ const QuestionForm = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default QuestionForm;
+export default QuestionForm
