@@ -1,7 +1,7 @@
 const mysql2 = require("mysql2")
 const dotenv = require("dotenv")
 dotenv.config()
-
+console.log("DB Password:", process.env.PASSWORD);
 const dbcon = mysql2.createPool({
   user: process.env.USER,
   database: process.env.DATABASE,

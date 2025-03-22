@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import axios from "../../axiosConfig";
+import axios from "../../../axiosConfig";
 import { useNavigate } from "react-router-dom";
 import classes from "./LoginPage.module.css";
 
@@ -47,7 +47,7 @@ function LoginPage() {
                 email: emailDom.current.value,
                 password: passwordDom.current.value
             });
-            alert("Successfully Logged In");
+            // alert("Successfully Logged In");
             localStorage.setItem("token", data.token);
             navigate("/home");
         } catch (error) {

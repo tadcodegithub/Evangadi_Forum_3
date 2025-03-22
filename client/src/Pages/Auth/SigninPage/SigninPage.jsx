@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
-import axios from "../../axiosConfig";
-import { useNavigate } from "react-router-dom";
+import axios from "../../../axiosConfig";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "./SigninPage.module.css";
 
 const SigninPage = () => {
@@ -102,6 +102,10 @@ const SigninPage = () => {
         {errors.password && <p className={classes.error}>{errors.password}</p>}
 
         <button className={classes.signinButton} type="submit">Agree and Join</button>
+        <h3>Alredy Have An Account</h3>
+        <Link to={'/login'}>
+        <button className={classes.signinButton}>login</button>
+        </Link>
       </form>
     </section>
   );
