@@ -63,18 +63,36 @@ const login = async (req, res) => {
       expiresIn: "1d",
     })
 
-    return res.status(200).json({ msg: "User login successful", token })
+    return res
+      .status(200)
+      .json({ msg: "User login successful", token, username, userid })
   } catch (error) {
     console.log(error.message)
     return res.status(500).json({ msg: "Server faced an error" })
   }
 }
 async function checkUser(req, res) {
+  console.log("in check")
   const username = req.user.username
   const userid = req.user.userid
-
+  console.log(username, userid)
   res.status(StatusCodes.OK).json({ msg: "valid user", username, userid })
   // res.send("hello this is check user")
 }
+async function getFullName(req, res) {
+  console.log("am in full name")
+  const [userfullname] = await DBConnection.query(
+    "SELECT *  FROM users WHERE userid = ?",
+    1
+  )
+  console.log(req.body.userid)
+//   fullname = userfullname[0].firstname + " " + userfullname[0].lastname
+  //   console.log(
+  //     "user full name",
+  //     userfullname[0].firstname + " " + userfullname[0].lastname
+  //   )
+//   res.status(StatusCodes.OK).json({ msg: "valid user", fullname })
+  // res.send("hello this is check user")
+}
 
-module.exports = { login, register, checkUser }
+module.exports = { login, register, checkUser, getFullName }

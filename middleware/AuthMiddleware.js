@@ -6,6 +6,7 @@ dotenv.config()
 const jwt = require("jsonwebtoken")
 async function autMiddleware(req, res, next) {
   const authHeader = req.headers.authorization
+  // console.log(authHeader.split(" ")[1], "now")
   if (!authHeader || !authHeader.startsWith("Bearer")) {
     return res
       .status(StatusCodes.UNAUTHORIZED)
