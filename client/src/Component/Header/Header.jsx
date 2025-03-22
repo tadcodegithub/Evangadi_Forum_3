@@ -1,15 +1,17 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import style from "./Header.module.css";
+import React, { useContext, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import style from "./Header.module.css"
+import { AppState } from "../../App"
 
 function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const navigate = useNavigate()
+  const { user } = useContext(AppState)
 
   const handleAuthClick = () => {
-    setIsLoggedIn((prevState) => !prevState);
-    navigate(isLoggedIn ? "/login" : "/dashboard");
-  };
+    setIsLoggedIn((prevState) => !prevState)
+    navigate(isLoggedIn ? "/login" : "/landing")
+  }
 
   return (
     <header className={style.header_container}>
@@ -27,7 +29,7 @@ function Header() {
         </button>
       </div>
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header

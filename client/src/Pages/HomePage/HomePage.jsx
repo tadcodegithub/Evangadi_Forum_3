@@ -90,7 +90,7 @@ function HomePage() {
                       <div>
                         <FaCircleUser size={60} color="gray" />
                         {/* user with flex column */}
-                        <p>{sinlQustion.userid}</p>
+                        <p>{sinlQustion.username}</p>
                       </div>
                       {/* icon */}
 

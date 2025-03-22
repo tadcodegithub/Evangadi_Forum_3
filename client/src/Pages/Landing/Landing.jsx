@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import style from "./index.module.css"
+import style from "./landing.module.css"
 import LoginPage from "../Auth/LoginPage/LoginPage"
 import SigninPage from "../Auth/SigninPage/SigninPage"
-import ForgetPassword from "../Auth/ForgetPassword"
+// import ForgetPassword from "../Auth/ForgetPassword"
 function Landing() {
   const [active, setAtive] = useState("signin")
   const [animation, setAnimation] = useState("")

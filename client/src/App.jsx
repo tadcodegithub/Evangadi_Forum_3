@@ -8,6 +8,7 @@ import {
 import HomePage from "./Pages/HomePage/HomePage"
 import axios from "./utility/axios"
 import QuestionForm from "./Pages/QuestionForm/QuestionForm"
+import Landing from "./Pages/Landing/Landing"
 export const AppState = createContext()
 function App() {
   const [user, setUser] = useState({})
@@ -55,7 +56,8 @@ function App() {
   return (
     <AppState.Provider value={{ user, setUser }}>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/landing" element={<Landing />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/ask" element={<QuestionForm />} />
       </Routes>
