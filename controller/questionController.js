@@ -57,7 +57,7 @@ async function getSeachedQuestion(req, res) {
 }
 module.exports = {
   createQuestion,
-  getAllQuestion,
+  getAllQuestion, 
   singleQuestion,
   getSeachedQuestion,
 };
