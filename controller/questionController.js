@@ -35,4 +35,20 @@ async function singleQuestion(req, res) {
   res.send(`specific question for id=${req.params.question_id}`)
 }
 async function getAllQuestion(req, res) {}
-module.exports = { createQuestion, getAllQuestion, singleQuestion }
+async function getSeachedQuestion(req, res) {
+  console.log("am in get searched question function ", req.params.search)
+  const [allQuestion] = await dbConnection.query(
+    `SELECT * FROM questions WHERE title like '%${req.params.search}%' or description like '%${req.params.search}%' `
+  )
+  console.log(allQuestion)
+  return res.status(StatusCodes.OK).json({
+    msg: "Question/s retrieved successfully ",
+    allQuestion,
+  })
+}
+module.exports = {
+  createQuestion,
+  getAllQuestion,
+  singleQuestion,
+  getSeachedQuestion,
+}

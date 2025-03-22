@@ -14,7 +14,7 @@ app.use(express.json())
 app.use("/api/users", usersRoutes)
 
 //question router
-app.use("/api/question", questionRoutes)
+app.use("/api/question",authMiddleWare, questionRoutes)
 
 async function start() {
   try {

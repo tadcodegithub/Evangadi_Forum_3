@@ -2,6 +2,7 @@ import React, { useRef } from "react"
 import { Link } from "react-router-dom"
 import styles from "./question.module.css"
 import axios from "../../utility/axios"
+import LayOut from "../../Component/LayOut/LayOut"
 const QuestionForm = () => {
   const titleRef = useRef(null)
   const descriptionRef = useRef(null)
@@ -10,8 +11,10 @@ const QuestionForm = () => {
     e.preventDefault()
     const title = titleRef.current.value
     const description = descriptionRef.current.value
-    const token = localStorage.getItem("token") // Get the token for authentication
+    // const token = localStorage.getItem("token") // Get the token for authentication
     // Check if the user is authenticated before sending the request
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRhZCIsInVzZXJpZCI6MSwiaWF0IjoxNzQyNjM0MjQ3LCJleHAiOjE3NDI3MjA2NDd9.Qz5Me1Vh_soKjpK5Zkn4j3NPZv06dVv3_onHyXXdO1A"
     if (!token) {
       alert("Please log in to ask a question")
       return
@@ -44,42 +47,44 @@ const QuestionForm = () => {
     }
   }
   return (
-    <div className={styles.question_page}>
-      <div className={styles.steps}>
-        <h2>Steps to write a good question</h2>
-        <ul>
-          <li>Summarize your problem in a one-line title.</li>
-          <li>Describe your problem in more detail.</li>
-          <li>Describe what you tried and what you expected to happen.</li>
-          <li>Review your question and post it to the site.</li>
-        </ul>
+    <LayOut>
+      <div className={styles.question_page}>
+        <div className={styles.steps}>
+          <h2>Steps to write a good question</h2>
+          <ul>
+            <li>Summarize your problem in a one-line title.</li>
+            <li>Describe your problem in more detail.</li>
+            <li>Describe what you tried and what you expected to happen.</li>
+            <li>Review your question and post it to the site.</li>
+          </ul>
+        </div>
+        <div className={styles.question_form_container}>
+          <h2>Ask a public question</h2>
+          <Link to="/home" className={styles.go_to_questions}>
+            Go to Question page
+          </Link>
+          <form onSubmit={handleSubmit} className={styles.question_form}>
+            <input
+              type="text"
+              placeholder="Title"
+              ref={titleRef}
+              required
+              className="title-input"
+            />
+            <textarea
+              placeholder="Question Description..."
+              ref={descriptionRef}
+              required
+              rows="6"
+              className="description-input"
+            />
+            <button type="submit" className={styles.post_button}>
+              Post Your Question
+            </button>
+          </form>
+        </div>
       </div>
-      <div className={styles.question_form_container}>
-        <h2>Ask a public question</h2>
-        <Link to="/questions" className={styles.go_to_questions}>
-          Go to Question page
-        </Link>
-        <form onSubmit={handleSubmit} className={styles.question_form}>
-          <input
-            type="text"
-            placeholder="Title"
-            ref={titleRef}
-            required
-            className="title-input"
-          />
-          <textarea
-            placeholder="Question Description..."
-            ref={descriptionRef}
-            required
-            rows="6"
-            className="description-input"
-          />
-          <button type="submit" className={styles.post_button}>
-            Post Your Question
-          </button>
-        </form>
-      </div>
-    </div>
+    </LayOut>
   )
 }
 
