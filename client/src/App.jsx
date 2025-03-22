@@ -1,10 +1,12 @@
 import React from 'react'
-import RegisterPage from './Pages/RegistrationPage/RegisterPage'
+import SigninPage from './Pages/SigninPage/SigninPage'
+import LoginPage from './Pages/LoginPage/LoginPage'
 
 function App() {
   return (
     <div>
-      <RegisterPage />
+      {/* <SigninPage /> */}
+      <LoginPage />
     </div>
   )
 }
