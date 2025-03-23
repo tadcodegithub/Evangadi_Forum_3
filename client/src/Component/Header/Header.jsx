@@ -1,15 +1,19 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import style from "./Header.module.css";
+
+import React, { useContext, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import style from "./Header.module.css"
+import { AppState } from "../../App"
 
 function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const navigate = useNavigate()
+  const { user } = useContext(AppState)
 
   const handleAuthClick = () => {
-    setIsLoggedIn((prevState) => !prevState);
-    navigate(isLoggedIn ? "/login" : "/dashboard");
-  };
+    // setIsLoggedIn((prevState) => !prevState)
+    localStorage.clear()
+    navigate("/landing")
+  }
 
   return (
     <header className={style.header_container}>
@@ -23,11 +27,13 @@ function Header() {
         <Link to="/How it works">How it Works</Link>
         <button onClick={handleAuthClick}>
           {" "}
-          {isLoggedIn ? "LOG OUT" : "SIGN IN"}{" "}
+          {user.username ? "LOG OUT" : "SIGN IN"}
+          {console.log(user.username ? "yes" : "no")}
+
         </button>
       </div>
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header

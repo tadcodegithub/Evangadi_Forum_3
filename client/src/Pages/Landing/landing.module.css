@@ -1,0 +1,17 @@
+.index_container {
+  background-image: url("/evangadi_back.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.index_content {
+  display: flex;
+  padding: 10% 5%;
+  gap: 25px;
+}
+.index_content .sinin_create_account {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  border: none;
+  width: 50%;
+}
