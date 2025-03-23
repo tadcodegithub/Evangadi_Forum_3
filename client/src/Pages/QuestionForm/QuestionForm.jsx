@@ -11,10 +11,8 @@ const QuestionForm = () => {
     e.preventDefault()
     const title = titleRef.current.value
     const description = descriptionRef.current.value
-    // const token = localStorage.getItem("token") // Get the token for authentication
+    const token = localStorage.getItem("token") // Get the token for authentication
     // Check if the user is authenticated before sending the request
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRhZCIsInVzZXJpZCI6MSwiaWF0IjoxNzQyNjM0MjQ3LCJleHAiOjE3NDI3MjA2NDd9.Qz5Me1Vh_soKjpK5Zkn4j3NPZv06dVv3_onHyXXdO1A"
     if (!token) {
       alert("Please log in to ask a question")
       return

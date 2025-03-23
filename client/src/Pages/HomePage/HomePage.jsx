@@ -12,38 +12,39 @@ function HomePage() {
   const [allQuestion, setAllQuestion] = useState([])
   const [search, setSeach] = useState("")
 
-  console.log("now seach for ",search)
+  console.log("now seach for ", search)
 
+  async function getSearchedQuesion() {
+    if (search) {
+      try {
+        const token = localStorage.getItem("token")
+        const { data } = await axios.get(
+          `/api/question/search/${search}`,
 
-  async function getSearchedQuesion() 
-  {
-    if(search){
-    try {
-      const { data } = await axios.get(
-        `/api/question/search/${search}`,
-
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRhZCIsInVzZXJpZCI6MSwiaWF0IjoxNzQyNjI3MDYwLCJleHAiOjE3NDI3MTM0NjB9.MEJa2BJznxhrYbJNtudWJ5nWvgYWAxUe3jBOSjlKtF8`, // Include the JWT token
-          },
-        } // Config object for headers
-      )
-      console.log(data.allQuestion)
-      setAllQuestion(data.allQuestion)
-    } catch (error) {
-      console.log(error)
-    }}
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Include the JWT token
+            },
+          } // Config object for headers
+        )
+        console.log(data.allQuestion)
+        setAllQuestion(data.allQuestion)
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
   async function getAllQuestion() {
     try {
+      const token = localStorage.getItem("token")
       const { data } = await axios.get(
         "/api/question",
 
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRhZCIsInVzZXJpZCI6MSwiaWF0IjoxNzQyNjI3MDYwLCJleHAiOjE3NDI3MTM0NjB9.MEJa2BJznxhrYbJNtudWJ5nWvgYWAxUe3jBOSjlKtF8`, // Include the JWT token
+            Authorization: `Bearer ${token}`, // Include the JWT token
           },
         } // Config object for headers
       )
@@ -55,10 +56,9 @@ function HomePage() {
     // console.log(response)
   }
   useEffect(() => {
-    if(search)   getSearchedQuesion()
-      else
+    if (search) getSearchedQuesion()
+    else
     getAllQuestion()
- 
   }, [search])
   return (
     <LayOut>
@@ -84,22 +84,24 @@ function HomePage() {
           <div>
             {allQuestion?.map((sinlQustion, index) => {
               return (
-                <section className={style.qustion_sinlQustion}>
-                  <div className={style.qustion_container} key={index}>
-                    <div className={style.qustion_container_logo}>
-                      <div>
-                        <FaCircleUser size={60} color="gray" />
-                        {/* user with flex column */}
-                        <p>{sinlQustion.username}</p>
+                <Link
+                  to={`/answer/${sinlQustion.questionid}`}
+                  className={style.qustion_sinlQustion_a}
+                >
+                  <section className={style.qustion_sinlQustion}>
+                    <div className={style.qustion_container} key={index}>
+                      <div className={style.qustion_container_logo}>
+                        <div className={style.userInfo}>
+                          <FaCircleUser className={style.userIcon} size={60} />
+                          <p>{sinlQustion?.username || "Anonymous"}</p>
+                        </div>
+                        <p>{sinlQustion?.title || "No title available"}</p>
                       </div>
-                      {/* icon */}
-
-                      <p>{sinlQustion.title}</p>
+                      <FaChevronRight className={style.chevronIcon} />
                     </div>
-                    <FaChevronRight />
-                  </div>
-                  <hr />
-                </section>
+                    <hr />
+                  </section>
+                </Link>
               )
             })}
           </div>

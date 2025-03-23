@@ -26,9 +26,11 @@
   align-items: center;
   justify-content: space-between;
 }
-.qustion_sinlQustion :hover {
-  height: 150px;
+.qustion_sinlQustion :hover svg {
+color: #1535d6;
+height: 50%;
 }
+
 .qustion_container_logo {
   display: flex;
   align-items: center;
@@ -60,5 +62,5 @@
   border-radius: 5px;
 }
 .qustion_and_search :focus-within {
-  outline:  2px solid rgb(233, 230, 230);
+  outline: 2px solid rgb(233, 230, 230);
 }

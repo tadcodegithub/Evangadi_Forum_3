@@ -15,15 +15,17 @@ function App() {
   const token = localStorage.getItem("token")
   const [userFullName, setUserFullName] = useState("")
   const navigate = useNavigate()
+
   async function checkUser() {
     try {
+      const token = localStorage.getItem("token")
       const { data } = await axios.get(
         "/api/users/check",
 
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRhZCIsInVzZXJpZCI6MSwiaWF0IjoxNzQyNjI3MDYwLCJleHAiOjE3NDI3MTM0NjB9.MEJa2BJznxhrYbJNtudWJ5nWvgYWAxUe3jBOSjlKtF8`, // Include the JWT token
+            Authorization: `Bearer ${token}`, // Include the JWT token
           },
         } // Config object for headers
       )
@@ -43,7 +45,7 @@ function App() {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRhZCIsInVzZXJpZCI6MSwiaWF0IjoxNzQyNjI3MDYwLCJleHAiOjE3NDI3MTM0NjB9.MEJa2BJznxhrYbJNtudWJ5nWvgYWAxUe3jBOSjlKtF8`, // Include the JWT token
+          Authorization: `Bearer ${token}`, // Include the JWT token
         },
       }
     )
@@ -60,6 +62,7 @@ function App() {
         <Route path="/landing" element={<Landing />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/ask" element={<QuestionForm />} />
+        <Route path="/answer/:questionid" element={<QuestionForm />} />
       </Routes>
     </AppState.Provider>
   )

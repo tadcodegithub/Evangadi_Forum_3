@@ -9,8 +9,9 @@ function Header() {
   const { user } = useContext(AppState)
 
   const handleAuthClick = () => {
-    setIsLoggedIn((prevState) => !prevState)
-    navigate(isLoggedIn ? "/login" : "/landing")
+    // setIsLoggedIn((prevState) => !prevState)
+    localStorage.clear()
+    navigate("/landing")
   }
 
   return (
@@ -25,7 +26,8 @@ function Header() {
         <Link to="/How it works">How it Works</Link>
         <button onClick={handleAuthClick}>
           {" "}
-          {isLoggedIn ? "LOG OUT" : "SIGN IN"}{" "}
+          {user.username ? "LOG OUT" : "SIGN IN"}
+          {console.log(user.username ? "yes" : "no")}
         </button>
       </div>
     </header>
