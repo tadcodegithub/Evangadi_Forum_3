@@ -64,7 +64,7 @@ function HomePage() {
       <div className={style.home_container}>
         <div className={style.ask_and_username}>
           <Link to="/ask">Ask Question</Link>
-          <p>{user.username}</p>
+          <p>Welcome: {user.username}</p>
         </div>
         <div className={style.qustion_and_search}>
           <p>Questions</p>

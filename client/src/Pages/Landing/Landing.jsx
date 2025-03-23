@@ -5,40 +5,31 @@ import SigninPage from "../Auth/SigninPage/SigninPage"
 import LayOut from "../../Component/LayOut/LayOut"
 // import ForgetPassword from "../Auth/ForgetPassword"
 function Landing() {
-  const [active, setAtive] = useState("signin")
-  const [animation, setAnimation] = useState("")
+  const [showLogin, setShowLogin] = useState(true)
+  const [slideDirection, setSlideDirection] = useState("")
 
-  const switchpage = (formName) => {
-    setAnimation("slide-out")
+  const handleSwitch = () => {
+    setSlideDirection(showLogin ? style.slideOutLeft : style.slideOutRight)
+
     setTimeout(() => {
-      setAtive(formName)
-      setAnimation("slide-in")
-    }, 500)
+      setShowLogin((prev) => !prev)
+      setSlideDirection(showLogin ? style.slideInRight : style.slideInLeft)
+    }, 50) // Animation time
   }
   return (
     <LayOut>
-      <section className={style.index_container}>
-        <div className={style.index_content}>
-          <div className={style.sinin_create_account}>
-            {active === "signin" && (
-              <div className={`form ${animation}`}>
-                <LoginPage switchpage={setAtive} />
-              </div>
+      <div className={style.landingPageContainer}>
+        <div className={style.formSection}>
+          <div className={`${style.formWrapper} ${slideDirection}`}>
+            {showLogin ? (
+              <LoginPage setShowLogin={handleSwitch} />
+            ) : (
+              <SigninPage setShowLogin={handleSwitch} />
             )}
-            {active === "createAccount" && (
-              <div className={`form ${animation}`}>
-                <SigninPage switchpage={setAtive} />
-              </div>
-            )}
-            {/* {active === "forget" && (
-            <div className={`form ${animation}`}>
-              <ForgetPassword switchpage={setAtive} />
-            </div>
-          )} */}
           </div>
-          <div className={style.about}>about</div>
         </div>
-      </section>
+        <div className={style.aboutSection}>{/* <About /> */} About</div>
+      </div>
     </LayOut>
   )
 }
