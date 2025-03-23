@@ -1,10 +1,9 @@
 import React from 'react'
+import { Footer } from './Component/Footer/Footer'
 
 function App() {
   return (
-    <div>
-      Hello this is our project client side skeleton!!
-    </div>
+    <Footer />
   )
 }
 
