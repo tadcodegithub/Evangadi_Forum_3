@@ -1,119 +1,120 @@
 import React, { useRef, useState } from "react"
-import axios from "../../../utility/axios"
-import { Link, useNavigate } from "react-router-dom"
-import classes from "./SigninPage.module.css"
+import Instance from "../../../utility/axios"
+import { useNavigate } from "react-router-dom"
+import styles from "./SigninPage.module.css"
+import { FaRegEyeSlash } from "react-icons/fa"
+import { GoEye } from "react-icons/go"
 
-const SigninPage = () => {
+function SigninPage({ setShowLogin }) {
+  const userNameDom = useRef(null)
+  const firstNameDom = useRef(null)
+  const lastNameDom = useRef(null)
+  const emailDom = useRef(null)
+  const passwordDom = useRef(null)
   const navigate = useNavigate()
-  const userNameDom = useRef()
-  const firstNameDom = useRef()
-  const lastNameDom = useRef()
-  const emailDom = useRef()
-  const passwordDom = useRef()
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPass, setShowPass] = useState(true)
+  const [textpass, setTextPass] = useState("password")
+  const [error, setError] = useState("")
 
-  // State to store validation errors
-  const [errors, setErrors] = useState({})
-
-  const validateForm = () => {
-    const errors = {}
-    const username = userNameDom.current.value.trim()
-    const firstName = firstNameDom.current.value.trim()
-    const lastName = lastNameDom.current.value.trim()
-    const email = emailDom.current.value.trim()
-    const password = passwordDom.current.value.trim()
-
-    if (!username) errors.username = "Username is required."
-    if (!firstName) errors.firstName = "First name is required."
-    if (!lastName) errors.lastName = "Last name is required."
-    if (!email) {
-      errors.email = "Email address is required."
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "Invalid email format."
-    }
-    if (!password) {
-      errors.password = "Password is required."
-    } else if (password.length < 6) {
-      errors.password = "Password must be at least 6 characters."
-    }
-
-    setErrors(errors)
-    return Object.keys(errors).length === 0
+  const passToggler = () => {
+    setShowPass(!showPass)
+    setTextPass(showPass ? "text" : "password")
   }
 
   async function handleSubmit(e) {
     e.preventDefault()
+    const userNameValue = userNameDom.current.value
+    const firstNameValue = firstNameDom.current.value
+    const lastNameValue = lastNameDom.current.value
+    const emailValue = emailDom.current.value
+    const passwordValue = passwordDom.current.value
 
-    if (!validateForm()) {
-      return // Stop submission if validation fails
+    if (
+      !userNameValue ||
+      !firstNameValue ||
+      !lastNameValue ||
+      !emailValue ||
+      !passwordValue
+    ) {
+      setError("Please provide all required information.")
+      return
     }
 
     try {
-      await axios.post("/api/users/register", {
-        username: userNameDom.current.value.trim(),
-        firstname: firstNameDom.current.value.trim(),
-        lastname: lastNameDom.current.value.trim(),
-        email: emailDom.current.value.trim(),
-        password: passwordDom.current.value.trim(),
+      const response = await Instance.post("api/users/register", {
+        username: userNameValue,
+        firstname: firstNameValue,
+        lastname: lastNameValue,
+        email: emailValue,
+        password: passwordValue,
       })
-      navigate("/login")
-    } catch (error) {
-      console.log(error.response)
+
+      console.log(response.data)
+      setError("")
+      // alert("User registered successfully. Please login to continue.")
+      setShowLogin(true)
+      navigate("/landing")
+    } catch (apiError) {
+      setError(
+        apiError.response?.data?.msg || "An error occurred during registration."
+      )
+      console.error("Registration error:", apiError)
     }
   }
 
   return (
-    <section className={classes.registerContainer}>
-      <h2>Join the Network</h2>
-      <form className={classes.siginForm} onSubmit={handleSubmit}>
-        <div className={classes.inputContainer}>
-          <input ref={userNameDom} type="text" placeholder="Username" />
-          {errors.username && (
-            <p className={classes.error}>{errors.username}</p>
-          )}
-        </div>
-
-        <div className={classes.inputContainer}>
-          <input ref={firstNameDom} type="text" placeholder="First Name" />
-          {errors.firstName && (
-            <p className={classes.error}>{errors.firstName}</p>
-          )}
-        </div>
-
-        <div className={classes.inputContainer}>
-          <input ref={lastNameDom} type="text" placeholder="Last Name" />
-          {errors.lastName && (
-            <p className={classes.error}>{errors.lastName}</p>
-          )}
-        </div>
-        <div className={classes.inputContainer}>
-          <input ref={emailDom} type="email" placeholder="Email Address" />
-          {errors.email && <p className={classes.error}>{errors.email}</p>}
-        </div>
-
-        <div className={classes.passwordContainer}>
-          <input
-            ref={passwordDom}
-            type={showPassword ? "text" : "password"}
-            placeholder="Password"
-          />
-          <span
-            className={classes.togglePassword}
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? "🙈" : "👁️"}
+    <section className={`${styles.input_container} ${styles.signup_container}`}>
+      <section className={styles.input_form}>
+        <h2>Join the network</h2>
+        <p className={styles.create_account}>
+          Already have an account?
+          <span className={styles.clickable} onClick={() => setShowLogin(true)}>
+            Sign in
           </span>
-        </div>
-        {errors.password && <p className={classes.error}>{errors.password}</p>}
-
-        <button className={classes.signinButton} type="submit">
-          Agree and Join
-        </button>
-        <h3>Alredy Have An Account</h3>
-        <Link to={"/login"}>
-          <button className={classes.signinButton}>login</button>
-        </Link>
-      </form>
+        </p>
+        <form onSubmit={handleSubmit}>
+          {error && <p className={styles.error}>{error}</p>}
+          <div>
+            <input ref={userNameDom} type="text" placeholder="Username" />
+          </div>
+          <div className={styles.names}>
+            <input ref={firstNameDom} type="text" placeholder="First name" />
+            <input ref={lastNameDom} type="text" placeholder="Last name" />
+          </div>
+          <div>
+            <input ref={emailDom} type="email" placeholder="Email address" />
+          </div>
+          <div className={styles.password_container}>
+            <input ref={passwordDom} type={textpass} placeholder="Password" />
+            <span onClick={passToggler}>
+              {showPass ? <FaRegEyeSlash /> : <GoEye color="#ff8000" />}
+            </span>
+          </div>
+          <div style={{ marginTop: "10px" }}>
+            <p className={styles.center}>
+              <span>
+                I agree to the{" "}
+                <a href="/privacy-policy" className={styles.clickable}>
+                  Privacy Policy
+                </a>{" "}
+                and{" "}
+                <a href="/terms-of-service" className={styles.clickable}>
+                  terms of service
+                </a>
+              </span>
+            </p>
+            <button
+              className={`${styles.login} ${styles.signup_btn}`}
+              type="submit"
+            >
+              Agree and Join
+            </button>
+            <a href="/landing" className={`${styles.clickable} ${styles.center}`}>
+              Already have an account?
+            </a>
+          </div>
+        </form>
+      </section>
     </section>
   )
 }
