@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState,useContext } from "react"
 import axios from "../../../utility/axios"
 import { useNavigate } from "react-router-dom"
 import classes from "./LoginPage.module.css"
+import { AppState } from "../../../App"
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -9,7 +10,7 @@ function LoginPage() {
   const passwordDom = useRef()
   const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState({ email: "", password: "" })
-
+  const { user, setUser } = useContext(AppState)
   function validateForm() {
     const emailValue = emailDom.current.value.trim()
     const passwordValue = passwordDom.current.value.trim()
@@ -49,6 +50,8 @@ function LoginPage() {
       })
       // alert("Successfully Logged In");
       localStorage.setItem("token", data.token)
+      console.log(data)
+      setUser(data)
       navigate("/home")
     } catch (error) {
       console.log(error.response)

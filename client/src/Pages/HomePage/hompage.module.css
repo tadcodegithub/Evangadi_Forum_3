@@ -16,6 +16,14 @@
   color: rgb(236, 226, 226);
   text-decoration: none;
 }
+.ask_and_username a:hover {
+  padding: 7px 40px;
+  border-radius: 5px;
+  border: none;
+  background-color: #2d49d3;
+  color: rgb(236, 226, 226);
+  text-decoration: none;
+}
 .home_container > p {
   font-size: 17pt;
 }
@@ -27,10 +35,14 @@
   justify-content: space-between;
 }
 .qustion_sinlQustion :hover svg {
-color: #1535d6;
-height: 50%;
+  color: #1535d6;
 }
-
+.qustion_sinlQustion_a a {
+  text-decoration: none;
+}
+.qustion_sinlQustion_a a:hover {
+  text-decoration: none;
+}
 .qustion_container_logo {
   display: flex;
   align-items: center;

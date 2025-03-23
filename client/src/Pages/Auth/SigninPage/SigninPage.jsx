@@ -86,7 +86,6 @@ const SigninPage = () => {
             <p className={classes.error}>{errors.lastName}</p>
           )}
         </div>
-
         <div className={classes.inputContainer}>
           <input ref={emailDom} type="email" placeholder="Email Address" />
           {errors.email && <p className={classes.error}>{errors.email}</p>}

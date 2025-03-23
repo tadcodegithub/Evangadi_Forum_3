@@ -6,11 +6,12 @@ import { AppState } from "../../App"
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const navigate = useNavigate()
-  const { user } = useContext(AppState)
+  const { user, setUser } = useContext(AppState)
 
   const handleAuthClick = () => {
     // setIsLoggedIn((prevState) => !prevState)
     localStorage.clear()
+    setUser({})
     navigate("/landing")
   }
 

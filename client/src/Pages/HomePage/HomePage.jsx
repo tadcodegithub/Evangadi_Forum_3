@@ -57,8 +57,7 @@ function HomePage() {
   }
   useEffect(() => {
     if (search) getSearchedQuesion()
-    else
-    getAllQuestion()
+    else getAllQuestion()
   }, [search])
   return (
     <LayOut>
@@ -69,25 +68,22 @@ function HomePage() {
         </div>
         <div className={style.qustion_and_search}>
           <p>Questions</p>
-          <input
+          {/* <input
             type="text"
             placeholder="Search Questions"
             value={search}
             onChange={(e) => setSeach(e.target.value)}
             id="search"
-          />
+          /> */}
         </div>
         <hr />
         {allQuestion.length <= 0 ? (
           <p>No Question!!</p>
         ) : (
-          <div>
+          <div className={style.qustion_sinlQustion_a}>
             {allQuestion?.map((sinlQustion, index) => {
               return (
-                <Link
-                  to={`/answer/${sinlQustion.questionid}`}
-                  className={style.qustion_sinlQustion_a}
-                >
+                <Link to={`/answer/${sinlQustion.questionid}`}>
                   <section className={style.qustion_sinlQustion}>
                     <div className={style.qustion_container} key={index}>
                       <div className={style.qustion_container_logo}>
