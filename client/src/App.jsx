@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, createContext } from "react"
 import {
   BrowserRouter as Router,
@@ -16,6 +17,7 @@ function App() {
   const token = localStorage.getItem("token")
   const [userFullName, setUserFullName] = useState("")
   const navigate = useNavigate()
+
 
   async function checkUser() {
     try {
@@ -58,6 +60,7 @@ function App() {
     // getFullname()
   }, [])
   return (
+
     <AppState.Provider value={{ user, setUser }}>
       <Routes>
         <Route path="/" element={<Landing />} />
@@ -68,6 +71,7 @@ function App() {
       </Routes>
     </AppState.Provider>
   )
+
 }
 
 export default App

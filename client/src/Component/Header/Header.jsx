@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import style from "./Header.module.css"
@@ -29,6 +30,7 @@ function Header() {
           {" "}
           {user.username ? "LOG OUT" : "SIGN IN"}
           {console.log(user.username ? "yes" : "no")}
+
         </button>
       </div>
     </header>
