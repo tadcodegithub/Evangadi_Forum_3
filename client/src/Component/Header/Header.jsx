@@ -1,42 +1,38 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import classes from "./Header.module.css";
-import logo from "./images/Logo.png";
+import React, { useContext, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import style from "./Header.module.css"
+import { AppState } from "../../App"
 
 function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate(); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const navigate = useNavigate()
+  const { user, setUser } = useContext(AppState)
 
-  
   const handleAuthClick = () => {
-    setIsLoggedIn((prevState) => !prevState);
-    navigate(isLoggedIn ? "/login" : "/dashboard"); 
-  };
+    // setIsLoggedIn((prevState) => !prevState)
+    localStorage.clear()
+    setUser({})
+    navigate("/landing")
+  }
 
   return (
-    <header className={classes.headerContainer}>
-      {/* Logo (Clickable for Navigation) */}
-      <div className={classes.innerClass} onClick={() => navigate("/HomePages")}>
-        <img className={classes.headerImg} src={logo} alt="/HomePage" />
+    <header className={style.header_container}>
+      <div className={style.logo_div}>
+        <div className={style.logo}>
+          <img src="/Logo.png" alt="/Home" />
+        </div>
       </div>
-
-      {/* Navigation Links */}
-      <nav className={classes.navLinks}>
-        <Link to="/HomePages">Home</Link>
-        <Link to="/How-it-works">How it works</Link>
-      </nav>
-
-      {/* Authentication Button */}
-      <div className={classes.authButton}>
-        <button
-          className={isLoggedIn ? classes.logoutButton : classes.signInButton}
-          onClick={handleAuthClick}
-        >
-          {isLoggedIn ? "LOG OUT" : "SIGN IN"}
+      <div className={style.login_logout_div}>
+        <Link to="/Home">Home</Link>
+        <Link to="/How it works">How it Works</Link>
+        <button onClick={handleAuthClick}>
+          {" "}
+          {user.username ? "LOG OUT" : "SIGN IN"}
+          {console.log(user.username ? "yes" : "no")}
         </button>
       </div>
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header

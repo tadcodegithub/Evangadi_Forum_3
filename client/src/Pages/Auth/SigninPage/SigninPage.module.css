@@ -1,0 +1,93 @@
+
+
+
+.input_form {
+  width: 600px;
+  margin:25px; 
+  padding: 20px;
+  text-align: center;
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.input_form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.create_account {
+  text-align: center;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.sign_in {
+  color: #4169e1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.names {
+  display: flex;
+  justify-content: space-between;
+}
+
+.names input {
+  width: 48%;
+}
+
+.password_container {
+  position: relative;
+}
+
+.password_container span {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.center {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.login,
+.signup_btn {
+  background-color: #4169e1;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.clickable {
+  color: #f38f24;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13pt;
+}
+.clickable:hover {
+  color: #9e580c;
+}

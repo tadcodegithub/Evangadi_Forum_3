@@ -1,0 +1,116 @@
+.input_form {
+  width: 600px;
+  margin: 25px;
+  padding: 20px;
+  text-align: center;
+  background: rgb(245, 243, 243);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.input_form h2 {
+  font-size: 22px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-family: Poppins, sans-serif;
+}
+
+.create_account {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-family: Poppins, sans-serif;
+}
+span {
+  text-decoration: none;
+}
+
+.error {
+  color: red;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.password_container {
+  position: relative;
+}
+
+.password_container span {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* .forgot_password {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.forgot_password a {
+  color: #4169e1;
+  text-decoration: none;
+} */
+
+.login_btn {
+  background-color: #fe8301;
+  color: white;
+  border: none;
+  padding: 12px 50px; /* Match About.module.css padding */
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  width: auto; /* Allow button to size based on content */
+}
+
+input {
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-bottom 0.8s ease-in-out;
+  /* background-color: yellow; */
+}
+input:focus-within {
+  /* border: none; */
+  border-bottom: 2px solid #f38f24;
+  outline: none;
+  animation: slide-border 0.5s forwards;
+}
+
+.clickable {
+  color: #f38f24;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13pt;
+}
+.clickable:hover {
+  color: #9e580c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .input_form {
+    width: 90%;
+    padding: 20px;
+  }
+}
+/* for b border of input */
+@keyframes slide-border {
+  0% {
+    border-bottom-width: 0;
+  }
+  100% {
+    border-bottom-width: 3px;
+  }
+}
