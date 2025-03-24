@@ -1,20 +1,20 @@
-
-
-
 .input_form {
   width: 600px;
-  margin:25px; 
+  /* margin:25px;  */
   padding: 20px;
   text-align: center;
   background: white;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
   border-radius: 10px;
   box-sizing: border-box;
 }
 
 .input_form h2 {
-  text-align: center;
-  margin-bottom: 20px;
+  font-size: 22px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-family: Poppins, sans-serif;
 }
 
 .create_account {
@@ -79,7 +79,7 @@ input {
   margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  box-sizing: border-box;
+  box-sizing: border-box;
 }
 .clickable {
   color: #f38f24;
