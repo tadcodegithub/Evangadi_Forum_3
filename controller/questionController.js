@@ -32,7 +32,17 @@ async function createQuestion(req, res) {
 }
 
 async function singleQuestion(req, res) {
-  res.send(`specific question for id=${req.params.question_id}`)
+  // res.send(`specific question for id=${req.params.question_id}`)
+
+
+  const [singleQuestion] = await dbConnection.query(
+    `SELECT q.id,q.questionid,q.userid ,q.title,q.description,q.tag,u.username FROM questions q join users u on q.userid = u.userid WHERE q.questionid = '${req.params.question_id}' order by q.id desc `
+  )
+  console.log(singleQuestion)
+  return res.status(StatusCodes.OK).json({
+    msg: "Question's retrieved successfully ",
+    singleQuestion,
+  })
 }
 async function getAllQuestion(req, res) {
   const [allQuestion] = await dbConnection.query(
