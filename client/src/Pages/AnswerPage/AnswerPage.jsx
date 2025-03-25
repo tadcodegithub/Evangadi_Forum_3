@@ -100,6 +100,7 @@ function AnswerPage() {
       setmessageColor("green")
       setMessage(data.message)
       getAnswer()
+      setAnswer("")
     } catch (error) {
       console.error("There was an error posting the answer:", error)
       setmessageColor("red")

@@ -104,12 +104,13 @@ a {
 
 .answer_form button {
   margin-top: 10px;
-  background-color: #5569f5;
+  background-color: #f5b031;
   color: white;
   margin-top: 10px;
   padding: 5px;
-  border-radius: 5px 10px;
+  border-radius: 10px;
   cursor: pointer;
+  border: none;
 }
 /* .userIcon {
   width: 50px;
