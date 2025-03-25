@@ -1,5 +1,5 @@
 .footer {
-  background-color: #222;
+  background-color: #3a4559;
   color: white;
   padding: 40px 20px;
   display: flex;
@@ -55,7 +55,7 @@ ul li {
 }
 
 ul li a {
-  color:#5F7888;
+  color: #5f7888;
   text-decoration: none;
   transition: 0.3s;
 }

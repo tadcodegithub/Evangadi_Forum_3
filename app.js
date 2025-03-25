@@ -5,6 +5,7 @@ const cors = require("cors")
 app.use(cors())
 const usersRoutes = require("./routes/userRoutes")
 const questionRoutes = require("./routes/questionRoute")
+const answerRoutes =require("./routes/answerRoutes") 
 const authMiddleWare = require("./middleware/AuthMiddleware")
 PORT = 5500
 const dbcon = require("./db/dbConfig")
@@ -15,6 +16,9 @@ app.use("/api/users", usersRoutes)
 
 //question router
 app.use("/api/question", authMiddleWare, questionRoutes)
+
+//answer router
+app.use("/api/answer", authMiddleWare, answerRoutes)
 
 async function start() {
   try {
