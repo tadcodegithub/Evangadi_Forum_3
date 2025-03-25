@@ -7,7 +7,9 @@ const jwt = require("jsonwebtoken")
 const register = async (req, res) => {
   const { username, email, password, firstname, lastname } = req.body
   if (!username || !email || !password || !firstname || !lastname) {
-    return res.status(400).json({ msg: "All input is required" })
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ msg: "All input is required" })
   }
 
   if (password.length < 8) {
@@ -86,12 +88,12 @@ async function getFullName(req, res) {
     1
   )
   console.log(req.body.userid)
-//   fullname = userfullname[0].firstname + " " + userfullname[0].lastname
+  //   fullname = userfullname[0].firstname + " " + userfullname[0].lastname
   //   console.log(
   //     "user full name",
   //     userfullname[0].firstname + " " + userfullname[0].lastname
   //   )
-//   res.status(StatusCodes.OK).json({ msg: "valid user", fullname })
+  //   res.status(StatusCodes.OK).json({ msg: "valid user", fullname })
   // res.send("hello this is check user")
 }
 

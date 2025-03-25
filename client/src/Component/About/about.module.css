@@ -21,6 +21,9 @@
   color: #f5f5f5;
   background-color: #ff8202;
   padding: 10px 10px;
-  outline: none;
-  border-radius: 5px;
+   border: solid 1px #ff8202;
+  border-radius: 5px;
+}
+.aboutPageButton:hover{
+    background-color: #df7307;
 }

@@ -23,7 +23,7 @@ function Header() {
         </div>
       </div>
       <div className={style.login_logout_div}>
-        <Link to="/home">Home</Link>
+        <Link to={user.username ? "/home" : "/landing"}>Home</Link>
         <Link to="/How it works">How it Works</Link>
         <button onClick={handleAuthClick}>
           {" "}

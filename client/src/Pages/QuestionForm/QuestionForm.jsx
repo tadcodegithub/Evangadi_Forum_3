@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import styles from "./question.module.css"
 import axios from "../../utility/axios"
@@ -6,7 +6,8 @@ import LayOut from "../../Component/LayOut/LayOut"
 const QuestionForm = () => {
   const titleRef = useRef(null)
   const descriptionRef = useRef(null)
-
+  const [msg, setMessage] = useState("")
+  const [msgcolor, setmesgColor] = useState("green")
   const handleSubmit = async (e) => {
     e.preventDefault()
     const title = titleRef.current.value
@@ -19,7 +20,7 @@ const QuestionForm = () => {
     }
 
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "/api/question",
         {
           title,
@@ -34,14 +35,16 @@ const QuestionForm = () => {
       )
 
       console.log("Question submitted:", { title, description })
-      console.log("Response from server:", response.data)
-
+      // console.log("Response from server:", response.data)
+      setMessage(data.message)
+      setmesgColor("green")
       // Clear the form
       titleRef.current.value = ""
       descriptionRef.current.value = ""
     } catch (error) {
+      setmesgColor("red")
       console.log("Error submitting question:", error.message)
-      alert("Failed to submit question. Please try again.")
+      setMessage("Failed to submit question. Please try again.")
     }
   }
   return (
@@ -61,6 +64,7 @@ const QuestionForm = () => {
           <Link to="/home" className={styles.go_to_questions}>
             Go to Question page
           </Link>
+          <div>{msg && <p style={{ color: "green" }}>{msg}</p>}</div>
           <form onSubmit={handleSubmit} className={styles.question_form}>
             <input
               type="text"

@@ -22,7 +22,7 @@ async function createQuestion(req, res) {
 
     return res
       .status(StatusCodes.CREATED)
-      .json({ message: "Question created successfully", questionid })
+      .json({ message: "Question Posted successfully", questionid })
   } catch (error) {
     console.error("Error creating question:", error.message)
     return res
@@ -33,7 +33,6 @@ async function createQuestion(req, res) {
 
 async function singleQuestion(req, res) {
   // res.send(`specific question for id=${req.params.question_id}`)
-
 
   const [singleQuestion] = await dbConnection.query(
     `SELECT q.id,q.questionid,q.userid ,q.title,q.description,q.tag,u.username FROM questions q join users u on q.userid = u.userid WHERE q.questionid = '${req.params.question_id}' order by q.id desc `
