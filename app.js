@@ -5,13 +5,18 @@ const cors = require("cors")
 app.use(cors())
 const usersRoutes = require("./routes/userRoutes")
 const questionRoutes = require("./routes/questionRoute")
-const answerRoutes =require("./routes/answerRoutes") 
+const answerRoutes = require("./routes/answerRoutes")
 const authMiddleWare = require("./middleware/AuthMiddleware")
 PORT = 5500
 const dbcon = require("./db/dbConfig")
 //login route
 
 app.use(express.json())
+
+app.get("/", (req, res) => {
+  res.send("done!")
+})
+
 app.use("/api/users", usersRoutes)
 
 //question router
