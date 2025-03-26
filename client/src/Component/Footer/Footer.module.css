@@ -1,0 +1,65 @@
+.footer {
+  background-color: #3a4559;
+  color: white;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.logoSection {
+  flex: 1;
+  min-width: 250px;
+}
+
+.logo {
+  width: 150px;
+  margin-bottom: 10px;
+}
+
+.iconsWrapper {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.icon {
+  color: white;
+  font-size: 24px;
+  transition: 0.3s;
+}
+
+.icon:hover {
+  color: #f4a261;
+}
+
+.linksSection,
+.contactSection {
+  flex: 1;
+  min-width: 250px;
+}
+
+h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  margin: 5px 0;
+}
+
+ul li a {
+  color: #5f7888;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+ul li a:hover {
+  color: #f4a261;
+}

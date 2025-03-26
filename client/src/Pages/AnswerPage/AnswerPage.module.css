@@ -1,0 +1,123 @@
+.outer_container {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 80%;
+  margin: 15px auto;
+  background-color: #fffefe;
+  padding-bottom: 20px;
+}
+.container {
+  height: auto;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.question_section,
+.community_answer,
+.answer_form {
+  margin-top: 30px;
+}
+.question_section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  p strong {
+    text-decoration: underline;
+    font-weight: 400;
+  }
+  P small {
+    font-size: 14px;
+    color: #6d6969;
+  }
+}
+.question_section p::first-letter {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+.community_answer h2 {
+  font-size: 40px;
+  border-top: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+  padding: 15px;
+}
+.community_answer svg {
+  color: rgba(38, 5, 150, 0.838);
+}
+.answer_container {
+    max-height: 400px;
+    overflow-y: scroll;
+  background-color: #f5f5f5;
+  border-radius: 10px;  
+  margin-top:10px ;
+}
+.user_avatar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.answer_form a {
+  text-decoration: none;
+  color: black;
+}
+.answer {
+  margin-top: 10px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  /* background-color: #e4e2e264; */
+}
+.answer_container hr{
+    width: 80%;
+    height: 2px;
+    background-color:rgb(231, 229, 229);
+     margin-left: 10px;
+    border: none;
+}
+textarea {
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+.answer_form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 30px;
+  box-shadow: 10px 0px 10px #cccccc6e;
+  border-radius: 20px;
+  background-color: #f9f9f995;
+}
+.answer_form h3,
+a {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.answer_form button {
+  margin-top: 10px;
+  background-color: #f5b031;
+  color: white;
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+}
+/* .userIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */

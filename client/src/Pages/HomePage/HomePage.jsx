@@ -68,13 +68,13 @@ function HomePage() {
         </div>
         <div className={style.qustion_and_search}>
           <p>Questions</p>
-          {/* <input
+          <input
             type="text"
             placeholder="Search Questions"
             value={search}
             onChange={(e) => setSeach(e.target.value)}
             id="search"
-          /> */}
+          />
         </div>
         <hr />
         {allQuestion.length <= 0 ? (

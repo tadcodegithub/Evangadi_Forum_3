@@ -4,6 +4,7 @@ import LoginPage from "../Auth/LoginPage/LoginPage"
 import SigninPage from "../Auth/SigninPage/SigninPage"
 import LayOut from "../../Component/LayOut/LayOut"
 // import ForgetPassword from "../Auth/ForgetPassword"
+import About from "../../Component/About/About"
 function Landing() {
   const [showLogin, setShowLogin] = useState(true)
   const [slideDirection, setSlideDirection] = useState("")
@@ -28,7 +29,9 @@ function Landing() {
             )}
           </div>
         </div>
-        <div className={style.aboutSection}>{/* <About /> */} About</div>
+        <div className={style.aboutSection}>
+          <About />{" "}
+        </div>
       </div>
     </LayOut>
   )

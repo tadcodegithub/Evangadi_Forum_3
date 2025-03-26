@@ -1,10 +1,24 @@
+.input_container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the top */
+  /* min-height: 100vh; */
+  background-color: white;
+   width: 600px;
+   border-radius: 15px;
+   /* height: 100vh; */
+}
+
+
+
+
 .input_form {
   width: 600px;
-  margin: 25px;
+  /* margin: 25px; */
   padding: 20px;
   text-align: center;
-  background: rgb(245, 243, 243);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background: transparent;
+  /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
   border-radius: 10px;
   box-sizing: border-box;
 }
