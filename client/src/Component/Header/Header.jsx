@@ -4,7 +4,7 @@ import style from "./Header.module.css"
 import { AppState } from "../../App"
 
 function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // const [isLoggedIn, setIsLoggedIn] = useState(false)
   const navigate = useNavigate()
   const { user, setUser } = useContext(AppState)
 

@@ -7,11 +7,12 @@ import { FaChevronRight } from "react-icons/fa6"
 import LayOut from "../../Component/LayOut/LayOut"
 import QuestionForm from "../QuestionForm/QuestionForm"
 import { Link } from "react-router-dom"
+const ITEMS_PER_PAGE = 4
 function HomePage() {
   const { user } = useContext(AppState)
   const [allQuestion, setAllQuestion] = useState([])
   const [search, setSeach] = useState("")
-
+  const [currentPage, setCurrentPage] = useState(1)
   console.log("now seach for ", search)
 
   async function getSearchedQuesion() {
@@ -59,6 +60,21 @@ function HomePage() {
     if (search) getSearchedQuesion()
     else getAllQuestion()
   }, [search])
+
+  const totalPages = Math.ceil(allQuestion.length / ITEMS_PER_PAGE)
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+  const currentQuestions = allQuestion.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  )
+  const nextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1)
+  }
+
+  const prevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1)
+  }
+
   return (
     <LayOut>
       <div className={style.home_container}>
@@ -81,7 +97,7 @@ function HomePage() {
           <p>No Question!!</p>
         ) : (
           <div className={style.qustion_sinlQustion_a}>
-            {allQuestion?.map((sinlQustion, index) => {
+            {currentQuestions?.map((sinlQustion, index) => {
               return (
                 <Link to={`/answer/${sinlQustion.questionid}`}>
                   <section className={style.qustion_sinlQustion}>
@@ -102,6 +118,18 @@ function HomePage() {
             })}
           </div>
         )}
+        <div className={style.pagination}>
+          <button onClick={prevPage} disabled={currentPage === 1}>
+            Previous
+          </button>
+          <span>
+            {" "}
+            Page {currentPage} of {totalPages}{" "}
+          </span>
+          <button onClick={nextPage} disabled={currentPage === totalPages}>
+            Next
+          </button>
+        </div>
       </div>
     </LayOut>
   )

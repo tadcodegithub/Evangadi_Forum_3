@@ -54,15 +54,21 @@ async function getAllQuestion(req, res) {
   })
 }
 async function getSeachedQuestion(req, res) {
-  console.log("am in get searched question function ", req.params.search)
-  const [allQuestion] = await dbConnection.query(
-    `SELECT q.id,q.questionid,q.userid ,q.title,q.description,q.tag,u.username FROM questions q join users u on q.userid = u.userid WHERE title like '%${req.params.search}%' or description like '%${req.params.search}%' order by q.id desc `
-  )
-  console.log(allQuestion)
-  return res.status(StatusCodes.OK).json({
-    msg: "Question/s retrieved successfully ",
-    allQuestion,
-  })
+  // console.log("am in get searched question function ", req.params.search)
+  try {
+    const [allQuestion] = await dbConnection.query(
+      `SELECT q.id,q.questionid,q.userid ,q.title,q.description,q.tag,u.username FROM questions q join users u on q.userid = u.userid WHERE title like '%${req.params.search}%' or description like '%${req.params.search}%' order by q.id desc `
+    )
+    console.log(allQuestion)
+    return res.status(StatusCodes.OK).json({
+      msg: "Question/s retrieved successfully ",
+      allQuestion,
+    })
+  } catch (error) {
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "An unexpected error occurred", error: error.message })
+  }
 }
 module.exports = {
   createQuestion,

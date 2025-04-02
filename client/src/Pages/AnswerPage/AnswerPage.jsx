@@ -8,7 +8,7 @@ import style from "./AnswerPage.module.css"
 import { useState, useEffect, useContext } from "react"
 import { AppState } from "../../App"
 import LayOut from "../../Component/LayOut/LayOut"
-
+const ITEMS_PER_PAGE = 4
 function AnswerPage() {
   const [answer, setAnswer] = useState("")
   const [question, setQuestion] = useState({})
@@ -17,8 +17,9 @@ function AnswerPage() {
   const [message, setMessage] = useState("")
   const [messageColor, setmessageColor] = useState("green")
   const [answers, setAnswers] = useState([])
-  console.log(questionid)
-  console.log(user.userid)
+  const [currentPage, setCurrentPage] = useState(1)
+  // console.log(questionid)
+  // console.log(user.userid)
   const token = localStorage.getItem("token")
   async function getQuestion() {
     try {
@@ -107,7 +108,18 @@ function AnswerPage() {
       setMessage("Error posting the answer")
     }
   }
+  const totalPages = Math.ceil(answers.length / ITEMS_PER_PAGE)
 
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+  const currentanswers = answers.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+
+  const nextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1)
+  }
+
+  const prevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1)
+  }
   return (
     <LayOut>
       <div className={style.outer_container}>
@@ -125,7 +137,7 @@ function AnswerPage() {
           <section className={style.community_answer}>
             <h2>Answer From The Community </h2>
             <div className={style.answer_container}>
-              {answers?.map((answer) => (
+              {currentanswers?.map((answer) => (
                 <>
                   <div className={style.answer}>
                     <div className={style.user_avatar}>
@@ -139,6 +151,18 @@ function AnswerPage() {
                   <hr />
                 </>
               ))}
+            </div>
+            <div className={style.pagination}>
+              <button onClick={prevPage} disabled={currentPage === 1}>
+                Previous
+              </button>
+              <span>
+                {" "}
+                Page {currentPage} of {totalPages}{" "}
+              </span>
+              <button onClick={nextPage} disabled={currentPage === totalPages}>
+                Next
+              </button>
             </div>
           </section>
 
