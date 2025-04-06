@@ -1,33 +1,33 @@
-const dbConnection = require("../db/dbConfig")
-const { v4: uuidv4 } = require("uuid")
-const { StatusCodes } = require("http-status-codes")
-const jwt = require("jsonwebtoken")
+const dbConnection = require("../db/dbConfig");
+const { v4: uuidv4 } = require("uuid");
+const { StatusCodes } = require("http-status-codes");
+const jwt = require("jsonwebtoken");
 
 async function createQuestion(req, res) {
-  const questionid = uuidv4() // Generate a unique question ID using uuid
-  const { title, description, tag } = req.body
-  const { userid } = req.user
+  const questionid = uuidv4(); // Generate a unique question ID using uuid
+  const { title, description, tag } = req.body;
+  const { userid } = req.user;
   // Validate required fields
   if (!title || !description) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       message: "Please provide all required fields (title and description)",
-    })
+    });
   }
   try {
     // Insert question into the database
     await dbConnection.query(
       "INSERT INTO questions (title, description, questionid, userid,tag) VALUES (?, ?, ?, ?,?)",
       [title, description, questionid, userid, tag || null]
-    )
+    );
 
     return res
       .status(StatusCodes.CREATED)
-      .json({ message: "Question Posted successfully", questionid })
+      .json({ message: "Question Posted successfully", questionid });
   } catch (error) {
-    console.error("Error creating question:", error.message)
+    console.error("Error creating question:", error.message);
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ message: "An unexpected error occurred", error: error.message })
+      .json({ message: "An unexpected error occurred", error: error.message });
   }
 }
 
@@ -36,38 +36,38 @@ async function singleQuestion(req, res) {
 
   const [singleQuestion] = await dbConnection.query(
     `SELECT q.id,q.questionid,q.userid ,q.title,q.description,q.tag,u.username FROM questions q join users u on q.userid = u.userid WHERE q.questionid = '${req.params.question_id}' order by q.id desc `
-  )
-  console.log(singleQuestion)
+  );
+  console.log(singleQuestion);
   return res.status(StatusCodes.OK).json({
     msg: "Question's retrieved successfully ",
     singleQuestion,
-  })
+  });
 }
 async function getAllQuestion(req, res) {
   const [allQuestion] = await dbConnection.query(
     "SELECT q.id,q.questionid,q.userid ,q.title,q.description,q.tag,u.username FROM questions q join users u on q.userid = u.userid order by q.id desc "
-  )
-  console.log(allQuestion)
+  );
+  console.log(allQuestion);
   return res.status(StatusCodes.OK).json({
     msg: "Question's retrieved successfully ",
     allQuestion,
-  })
+  });
 }
 async function getSeachedQuestion(req, res) {
   // console.log("am in get searched question function ", req.params.search)
   try {
     const [allQuestion] = await dbConnection.query(
       `SELECT q.id,q.questionid,q.userid ,q.title,q.description,q.tag,u.username FROM questions q join users u on q.userid = u.userid WHERE title like '%${req.params.search}%' or description like '%${req.params.search}%' order by q.id desc `
-    )
-    console.log(allQuestion)
+    );
+    console.log(allQuestion);
     return res.status(StatusCodes.OK).json({
       msg: "Question/s retrieved successfully ",
       allQuestion,
-    })
+    });
   } catch (error) {
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ message: "An unexpected error occurred", error: error.message })
+      .json({ message: "An unexpected error occurred", error: error.message });
   }
 }
 module.exports = {
@@ -75,4 +75,4 @@ module.exports = {
   getAllQuestion,
   singleQuestion,
   getSeachedQuestion,
-}
+};
